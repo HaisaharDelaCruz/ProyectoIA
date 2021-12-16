@@ -1,0 +1,43 @@
+<body>
+<input type="file" id="archivo"> 
+
+<div id="imagen"></div>
+</body>
+
+<script type="module">
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject, getMetadata } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyD8fbyAn78JNzNqCMBkPzMMiFNP0ZZlkck",
+  authDomain: "proyectoia-66872.firebaseapp.com",
+  projectId: "proyectoia-66872",
+  storageBucket: "proyectoia-66872.appspot.com",
+  messagingSenderId: "1074115800759",
+  appId: "1:1074115800759:web:6c0337f12e8ac48f7a6732"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
+document.getElementById("archivo").addEventListener("change", function() {
+    var referencia = ref(storage, `archivo/${this.files[0].name}`);
+
+    uploadBytes(referencia, this.files[0]).then(snapshot => { //Se rectificara si el archivo a sido subio correctamente
+        console.log(`El archivo: ${this.files[0].name} ha sido subido ha firebase storage`);
+
+        getDownloadURL(referencia).then(url => { //Recibira la URL donde sera para descargar el Archivo
+            document.getElementById("imagen").innerHTML = `<a href="${url}"> <img src="${url}"> </a>`
+            console.log(url);
+        });
+    });
+});
+
+
+</script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="/style/darkly.cs" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <% if (!user) { %>
+  <a href="/signin">Signin</a>
+  <a href="/signup">Signup</a>
+  <a href="/archivos">Archivos</a>
+  <% } else { %>
+  <a href="/logout">Logout</a>
+  <a href="/profile">Profle</a>
+  <% } %>
+
+  <%if (signinMessage) {%>
+    <p><%= signinMessage %></p>
+  <% } %>
+  <%if (signupMessage) {%>
+    <p><%= signupMessage %></p>
+  <% } %>
+
+  <%- body %>
+</body>
+</html>
